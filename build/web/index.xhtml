@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <f:view contentType="text/html; charset=UTF-8">
+
+        <h:head>
+            <f:facet name="first">
+                <title>Controle d'Accès</title>
+            </f:facet>
+        </h:head>
+
+        <h:body style="background: linear-gradient(45deg, red, yellow) no-repeat center fixed; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+
+            <p:growl id="messages" showDetail="false"/>
+            <h:form>
+
+                <p:panel style="text-align: center; background: linear-gradient(45deg, yellowgreen, paleturquoise) no-repeat center fixed; border: 2px solid black">
+                    <h1 style="font-weight: 100; color: black">Bienvenue sur l'application Web de Contrôle d'accès !</h1>
+                </p:panel>
+                <br />
+
+                <!-- Ici, il y aura : les vues et si possible à 
+                gauche les boutons pour changer de vue-->
+
+                <nav style="position: absolute; top: inherit; left: 5">
+
+                    <p:panel style="background: linear-gradient(90deg, teal, blue) no-repeat center fixed; border: 2px solid black">    
+
+                        <h4 style="text-align: center; color: white;">Navigation</h4>
+
+                        <p:commandButton value="Utilisateurs" action="#{navigatorBean.selectPersonneView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black"  />
+                        <br/><br/>
+                        <p:commandButton value="Autorisations" action="#{navigatorBean.selectAutorisationView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                        <br /><br />
+                        <p:commandButton value="Attributions" action="#{navigatorBean.selectAttributionView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                        <br/><br/>
+                        <p:commandButton value="Badges" action="#{navigatorBean.selectBadgeView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                        <br/><br/>
+                        <p:commandButton value="Salles" action="#{navigatorBean.selectSalleView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                        <br/><br/>
+                        <p:commandButton value="Evenement" action="#{navigatorBean.selectEvenementView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                        <br/><br/>
+                        <p:commandButton value="Plages Horaire" action="#{navigatorBean.selectTimeSlotView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+
+                    </p:panel>
+
+                </nav>
+
+                <ui:insert name="content">
+                    <ui:include id="fragment" src="#{navigatorBean.content}"/>
+                </ui:insert>
+
+            </h:form>
+
+        </h:body>
+
+    </f:view>
+
+</html>
+

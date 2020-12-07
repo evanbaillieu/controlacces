@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <h:form>
+            <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
+                <p:commandButton value="Update" type="button" onclick="PF('dlg2').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+            </p:panel>
+
+            <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black">
+                <h2 style="text-align: center; text-decoration: underline; color: black">Plages Horaires</h2>
+                <p:dataTable id="timeSlots" var="timeSlot" value="#{timeSlotBean.timeSlots}" selectionMode="single" selection="#{timeSlotBean.selectegTs}" rowKey="#{timeSlot.id}" style="text-align: center;">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{timeSlot.id}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Jour de début">
+                        <h:outputText value="#{timeSlot.beginDay}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Heure">
+                        <h:outputText value="#{timeSlot.beginHour}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Minutes">
+                        <h:outputText value="#{timeSlot.beginMinutes}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Jour de fin">
+                        <h:outputText value="#{timeSlot.endDay}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Heure">
+                        <h:outputText value="#{timeSlot.endHour}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Minutes">
+                        <h:outputText value="#{timeSlot.endMinutes}" style="color: black"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Remove" action="#{timeSlotBean.removePlageHoraire(timeSlotBean.selectegTs.id)}" update="timeSlots" ajax="false" style="border: 2px solid black; color: black"/>
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>
+
+            <h:panelGroup>
+                <p:dialog header="Ajout/Modification d'une Plage Horaire" widgetVar="dlg2" modal="true" resizable="false" showEffect="fade">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="beginDay" value="beginDay :" />
+                        <p:selectOneMenu id="beginDay" value="#{timeSlotBean.beginDay}" converter="DayConverter">
+                            <f:selectItems value="#{timeSlotBean.joursSemaine}" var="j" itemLabel="#{j}" itemValue="#{j}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="beginHour" value="beginHour :" />
+                        <p:inputNumber id="beginHour" minValue="0" maxValue="24" maxlength="2" value="#{timeSlotBean.beginHour}" />
+
+                        <h:outputLabel for="beginMinutes" value="beginMinutes :" />
+                        <p:inputNumber id="beginMinutes" minValue="0" maxValue="60" maxlength="2" value="#{timeSlotBean.beginMinutes}" />
+
+                        <h:outputLabel for="endDay" value="endDay :" />
+                        <p:selectOneMenu id="endDay" value="#{timeSlotBean.endDay}" converter="DayConverter">
+                            <f:selectItems value="#{timeSlotBean.joursSemaine}" var="j" itemLabel="#{j}" itemValue="#{j}"/>
+                        </p:selectOneMenu>
+
+                        <h:outputLabel for="endHour" value="endHour :" />
+                        <p:inputNumber id="endHour" minValue="0" maxValue="24" maxlength="2" value="#{timeSlotBean.endHour}" />
+
+                        <h:outputLabel for="endMinutes" value="endMinutes :" />
+                        <p:inputNumber id="endMinutes" minValue="0" maxValue="60" maxlength="2" value="#{timeSlotBean.endMinutes}" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Ajouter/Modifier" action="#{timeSlotBean.addEditPlageHoraire()}" update="timeSlots" style="margin-right:20px; border: 2px solid black; color: black" onclick="PF('dlg2').hide();" />
+                        </f:facet>
+                    </h:panelGrid>
+                </p:dialog>
+            </h:panelGroup>
+        </h:form>
+    </body>
+</html>

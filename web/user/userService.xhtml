@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
+        <p:commandButton value="Add" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+    </p:panel>
+    <h:form>
+        <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black">
+            <h2 style="color: black; text-align: center; text-decoration: underline">Utilisateurs</h2>
+            <p:dataTable id="personnes" var="personne" value="#{userBean.personnesBean}" selectionMode="single" selection="#{userBean.selectedPersBean}" rowKey="#{personne.id}" style="text-align: center; ">
+                <p:column headerText="ID">
+                    <h:outputText value="#{personne.id}" style="color: black"/>
+                </p:column>
+                <p:column headerText="Nom">
+                    <h:outputText value="#{personne.nom}" style="color: black"/>
+                </p:column>
+                <p:column headerText="Prénom">
+                    <h:outputText value="#{personne.prenom}" style="color: black"/>
+                </p:column>
+                <p:column headerText="Discriminant">
+                    <h:outputText value="#{personne.discriminant}" style="color: black"/>
+                </p:column>
+                <p:column headerText="Login">
+                    <h:outputText value="#{personne.login}" style="color: black"/>
+                </p:column>
+                <p:column headerText="Mot De Passe">
+                    <h:outputText value="#{personne.password}" style="color: black"/>
+                </p:column>
+                <f:facet name="footer">
+                    <p:commandButton value="Remove" action="#{userBean.removePersBean(userBean.selectedPersBean.id)}" ajax="false" update="personnes" style="border: 2px solid black; color: black"/>
+                </f:facet>
+            </p:dataTable>
+
+            <h:panelGroup>
+                <p:dialog header="Ajout d'une Personne" widgetVar="dlg1" modal="true" resizable="false" showEffect="fade">
+
+                    <h:panelGrid columns="2" cellpadding="5">
+
+                        <h:outputLabel value="Nom :" for="nom" />
+                        <p:inputText id="nom" value="#{userBean.nom}" maxlength="30" />
+
+                        <h:outputLabel value="Prénom :" for="prenom"/>
+                        <p:inputText id="prenom" value="#{userBean.prenom}" maxlength="30"/>
+
+                        <h:outputLabel value="Login :" for="login"/>
+                        <p:inputText id="login" value="#{userBean.login}" maxlength="30"/>
+
+                        <h:outputLabel value="Mot de Passe :" for="mdp" />
+                        <p:inputText id="mdp" value="#{userBean.mdp}" maxlength="30"  type="password"/>
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Ajouter/Modifier" action="#{userBean.addEditPersonne()}" update="personnes" style="margin-right:20px; border: 2px solid black; color: black" onclick="PF('dlg2').hide();" />
+                        </f:facet>
+                    </h:panelGrid>
+
+                </p:dialog>
+            </h:panelGroup>
+        </p:panel>
+    </h:form>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <body>
+        <h:form>
+            <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
+                <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+            </p:panel>
+            
+            <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black">
+                <h2 style="text-align: center; text-decoration: underline; color: black">Autorisations</h2>
+                <p:dataTable id="autorisations" var="autorisation" value="#{autorisationBean.autorisations}" selectionMode="single" selection="#{autorisationBean.selectedAuto}" rowKey="#{autorisation.id}" style="text-align: center;">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{autorisation.id}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="ID Personne">
+                        <h:outputText value="#{autorisation.personne.id}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="ID Plage Horaire">
+                        <h:outputText value="#{autorisation.plageHoraire.id}" style="color: black"/>
+                    </p:column>
+                    <p:column headerText="Salle">
+                        <h:outputText value="#{autorisation.salle.id}" style="color: black"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton value="Remove" action="#{autorisationBean.removeAutorisation(autorisationBean.selectedAuto)}" update="autorisations" ajax="false" style="border: 2px solid black; color: black"/>
+                    </f:facet>
+                </p:dataTable>
+
+                <h:panelGroup>
+
+                    <p:dialog header="Ajout/Modification d'une autorisation" widgetVar="dlg1" modal="true" resizable="false" showEffect="fade">
+
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel value="Personne :" />
+                                <p:selectOneMenu value="#{autorisationBean.personne}" converter="PersonneConverter">
+                                    <f:selectItems value="#{autorisationBean.personnes}" var="p" itemValue="#{p.id}" itemLabel="ID : #{p.id} : #{p.nom} #{p.prenom}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel value="Salle :" />
+                                <p:selectOneMenu value="#{autorisationBean.salle}" converter="SalleConverter">
+                                    <f:selectItems value="#{autorisationBean.salles}" var="s" itemValue="#{s.id}" itemLabel="#{s.id} est #{salleBean.isProtege(s)}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel value="TimeSlots :" />
+                                <p:selectOneMenu value="#{autorisationBean.timeSlot}" converter="TimeSlotConverter" >
+                                    <f:selectItems value="#{autorisationBean.timeSlots}" var="ts" itemValue="#{ts.id}" itemLabel="ID : #{ts.id} : #{ts.beginDay} #{ts.beginHour}:#{ts.beginMinutes} to #{ts.endDay} #{ts.endHour}:#{ts.endMinutes}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                            <p:commandButton value="Update" action="#{autorisationBean.addEditAutorisation()}" update="autorisations" style="border: 2px solid black; border-radius: 5px; color: black" onclick="PF('dlg1').hide()"/>
+
+                    </p:dialog>
+                </h:panelGroup>
+
+            </p:panel>
+        </h:form>
+    </body>
+</html>
