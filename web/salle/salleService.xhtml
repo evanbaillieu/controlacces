@@ -11,23 +11,23 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:form>
 
-        <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
-            <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+        <p:panel style="margin-left: 210px; margin-bottom: 5px;">
+            <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px;"/>
         </p:panel>
 
-        <p:dialog header="Ajout/Modification d'une salle" widgetVar="dlg1" modal="true" resizable="false" showEffect="fade">
+        <p:dialog header="Ajout/Modification d'une salle" widgetVar="dlg1" modal="true" resizable="false"  showEffect="fade">
             <h:panelGrid columns="2" cellpadding="5">
                 <h:outputLabel for="salle" value="Salle :" />
                 <p:inputNumber id="salle" minValue="0" maxValue="1000" required="true" value="#{salleBean.salle}" label="salle"/>
                 <h:outputLabel for="protege" value="Protection :"/>
-                <p:inputSwitch value="#{salleBean.protege}" label="protege" style="border: 2px solid black"/>
+                <p:inputSwitch value="#{salleBean.protege}" label="protege" />
                 <f:facet name="footer">
                     <p:commandButton value="Ajouter/Modifier" action="#{salleBean.addSalle(salleBean.salle, salleBean.protege)}" update="salles" style="margin-right:20px; border: 2px solid black; color: black" onclick="PF('dlg1').hide();" />
                 </f:facet>
             </h:panelGrid>
         </p:dialog>
 
-        <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black;">
+        <p:panel style="float: left; position: absolute; margin-left: 210px;">
             <h2 style="text-align: center; text-decoration: underline; color: black">Salles</h2>
             <p:dataTable id="salles" var="salle" value="#{salleBean.salles}" selectionMode="single" selection="#{salleBean.selectedSalle}" rowKey="#{salle.id}" style="text-align: center;">
                 <p:column headerText="ID">
@@ -37,7 +37,7 @@ and open the template in the editor.
                     <h:outputText value="#{salleBean.isProtege(salle)}" style="color: black"/>
                 </p:column>
                 <f:facet name="footer">
-                    <p:commandButton value="Remove" action="#{salleBean.removeSalle(salleBean.selectedSalle)}" update="salles" ajax="false" style="border: 2px solid black; color: black"/>
+                    <p:commandButton value="Remove" action="#{salleBean.removeSalle(salleBean.selectedSalle)}" update="salles" ajax="false"/>
                 </f:facet>
             </p:dataTable>
         </p:panel>

@@ -13,46 +13,113 @@
             </f:facet>
         </h:head>
 
-        <h:body style="background: linear-gradient(45deg, red, yellow) no-repeat center fixed; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+        <h:body style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
 
             <p:growl id="messages" showDetail="false"/>
             <h:form>
+                <style>
+                    body{
+                        margin-top: 10%
+                    }
+                    ul{
+                        list-style-type: none;
+                        padding: 0px;
+                    }
+                    .item{
+                        margin-bottom: 20px;
+                        text-decoration: none; 
 
-                <p:panel style="text-align: center; background: linear-gradient(45deg, yellowgreen, paleturquoise) no-repeat center fixed; border: 2px solid black">
-                    <h1 style="font-weight: 100; color: black">Bienvenue sur l'application Web de Contrôle d'accès !</h1>
-                </p:panel>
-                <br />
+                    }
+                    .menu{
+                        position: absolute; 
+                        top: 0px; 
+                        left: 5px;
+
+                    }
+                
+
+                </style>
 
                 <!-- Ici, il y aura : les vues et si possible à 
                 gauche les boutons pour changer de vue-->
 
-                <nav style="position: absolute; top: inherit; left: 5">
 
-                    <p:panel style="background: linear-gradient(90deg, teal, blue) no-repeat center fixed; border: 2px solid black">    
+                <nav class="menu">
+                    <p:panel style=" box-shadow:
+                             0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+                             0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+                             0 12.5px 10px rgba(0, 0, 0, 0.06),
+                             0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+                             0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+                             0 100px 80px rgba(0, 0, 0, 0.12)
+                             ;
 
-                        <h4 style="text-align: center; color: white;">Navigation</h4>
 
-                        <p:commandButton value="Utilisateurs" action="#{navigatorBean.selectPersonneView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black"  />
-                        <br/><br/>
-                        <p:commandButton value="Autorisations" action="#{navigatorBean.selectAutorisationView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
-                        <br /><br />
-                        <p:commandButton value="Attributions" action="#{navigatorBean.selectAttributionView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
-                        <br/><br/>
-                        <p:commandButton value="Badges" action="#{navigatorBean.selectBadgeView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
-                        <br/><br/>
-                        <p:commandButton value="Salles" action="#{navigatorBean.selectSalleView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
-                        <br/><br/>
-                        <p:commandButton value="Evenement" action="#{navigatorBean.selectEvenementView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
-                        <br/><br/>
-                        <p:commandButton value="Plages Horaire" action="#{navigatorBean.selectTimeSlotView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
 
-                    </p:panel>
+                             
+                             background: white;
+                             border-radius: 5px; border: 0px">    
+                        <ul>
 
+                            <li  class="item">
+                                <p:commandButton  value="Utilisateurs"  action="#{navigatorBean.selectPersonneView()}" ajax="false" style="font-weight: 200; width: 150px;"  />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Autorisations" action="#{navigatorBean.selectAutorisationView()}" ajax="false" style="font-weight: 200; width: 150px;"/>
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Attributions" action="#{navigatorBean.selectAttributionView()}" ajax="false" style="font-weight: 200; width: 150px;" />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Badges" action="#{navigatorBean.selectBadgeView()}" ajax="false" style="font-weight: 200; width: 150px; " />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Salles" action="#{navigatorBean.selectSalleView()}" ajax="false" style="font-weight: 200; width: 150px;" />
+                            </li>
+                            <li class="item">
+                                <p:commandButton value="Evenement" action="#{navigatorBean.selectEvenementView()}" ajax="false" style="font-weight: 200; width: 150px; " />
+                            </li>
+                            <li class="item">
+                                <p:commandButton value="Plages Horaire" action="#{navigatorBean.selectTimeSlotView()}" ajax="false" style="font-weight: 200; width: 150px;" />
+                            </li>
+                        </ul>
+                    </p:panel> 
                 </nav>
 
                 <ui:insert name="content">
                     <ui:include id="fragment" src="#{navigatorBean.content}"/>
                 </ui:insert>
+
+                <!--<nav>
+
+                    <p:panel>    
+                        <ul>
+                            <h4 style="text-align: center; color: white;">Navigation</h4>
+                            <li  class="item">
+                                <p:commandButton value="Utilisateurs" action="#{navigatorBean.selectPersonneView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black"  />
+                            </li>
+                            <li id="item1" class="item">
+                                <p:commandButton value="Autorisations" action="#{navigatorBean.selectAutorisationView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Attributions" action="#{navigatorBean.selectAttributionView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Badges" action="#{navigatorBean.selectBadgeView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                            <li  class="item">
+                                <p:commandButton value="Salles" action="#{navigatorBean.selectSalleView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                            <li class="item">
+                                <p:commandButton value="Evenement" action="#{navigatorBean.selectEvenementView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                            <li class="item">
+                                <p:commandButton value="Plages Horaire" action="#{navigatorBean.selectTimeSlotView()}" ajax="false" style="font-weight: 200; width: 150px; border: 2px solid black; color: black" />
+                            </li>
+                        </ul>
+                    </p:panel> 
+
+                </nav>-->
 
             </h:form>
 
