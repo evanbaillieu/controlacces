@@ -22,7 +22,7 @@ and open the template in the editor.
                 <h:outputLabel for="protege" value="Protection :"/>
                 <p:inputSwitch value="#{salleBean.protege}" label="protege" />
                 <f:facet name="footer">
-                    <p:commandButton value="Ajouter/Modifier" action="#{salleBean.addSalle(salleBean.salle, salleBean.protege)}" update="salles" style="margin-right:20px; border: 2px solid black; color: black" onclick="PF('dlg1').hide();" />
+                    <p:commandButton value="Ajouter/Modifier" action="#{salleBean.addSalle(salleBean.salle, salleBean.protege)}" update="salles"  onclick="PF('dlg1').hide();" />
                 </f:facet>
             </h:panelGrid>
         </p:dialog>

@@ -11,11 +11,11 @@ and open the template in the editor.
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <body>
         <h:form>
-            <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
-                <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+            <p:panel style="margin-left: 210px; margin-bottom: 5px;">
+                <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; color: black"/>
             </p:panel>
             
-            <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black">
+            <p:panel style="float: left; position: absolute; margin-left: 210px;">
                 <h2 style="text-align: center; text-decoration: underline; color: black">Autorisations</h2>
                 <p:dataTable id="autorisations" var="autorisation" value="#{autorisationBean.autorisations}" selectionMode="single" selection="#{autorisationBean.selectedAuto}" rowKey="#{autorisation.id}" style="text-align: center;">
                     <p:column headerText="ID">
@@ -31,7 +31,7 @@ and open the template in the editor.
                         <h:outputText value="#{autorisation.salle.id}" style="color: black"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton value="Remove" action="#{autorisationBean.removeAutorisation(autorisationBean.selectedAuto)}" update="autorisations" ajax="false" style="border: 2px solid black; color: black"/>
+                        <p:commandButton value="Remove" action="#{autorisationBean.removeAutorisation(autorisationBean.selectedAuto)}" update="autorisations" ajax="false"/>
                     </f:facet>
                 </p:dataTable>
 
@@ -59,7 +59,7 @@ and open the template in the editor.
                                     <f:selectItems value="#{autorisationBean.timeSlots}" var="ts" itemValue="#{ts.id}" itemLabel="ID : #{ts.id} : #{ts.beginDay} #{ts.beginHour}:#{ts.beginMinutes} to #{ts.endDay} #{ts.endHour}:#{ts.endMinutes}" />
                                 </p:selectOneMenu>
                             </h:panelGrid>
-                            <p:commandButton value="Update" action="#{autorisationBean.addEditAutorisation()}" update="autorisations" style="border: 2px solid black; border-radius: 5px; color: black" onclick="PF('dlg1').hide()"/>
+                            <p:commandButton value="Update" action="#{autorisationBean.addEditAutorisation()}" update="autorisations" style="margin-right:20px; " onclick="PF('dlg1').hide()"/>
 
                     </p:dialog>
                 </h:panelGroup>

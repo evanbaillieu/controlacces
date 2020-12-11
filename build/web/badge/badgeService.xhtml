@@ -12,18 +12,18 @@ and open the template in the editor.
     <body>
         <h:form>
             <p:panel style="margin-left: 210px; margin-bottom: 5px; border: 2px solid black; width: auto; background-color: gray">
-                <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px; border: 2px solid black; color: black"/>
+                <p:commandButton value="Add/Edit" type="button" onclick="PF('dlg1').show();" style="margin-right:20px;"/>
             </p:panel>
             <p:dialog header="Ajout/Modification d'un badge" widgetVar="dlg1" modal="true" resizable="false" showEffect="fade">
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="contenu" value="Contenu :" />
                     <h:inputText id="contenu" value="#{badgeBean.contenu}" maxlength="10"/>
                     <f:facet name="footer">
-                        <p:commandButton value="Ajouter/Modifier" action="#{badgeBean.addBadge(badgeBean.contenu)}" update="badges" style="margin-right:20px; border: 2px solid black; color: black" onclick="PF('dlg1').hide();" />
+                        <p:commandButton value="Ajouter/Modifier" action="#{badgeBean.addBadge(badgeBean.contenu)}" update="badges" style="margin-right:20px; " onclick="PF('dlg1').hide();" />
                     </f:facet>
                 </h:panelGrid>
             </p:dialog>
-            <p:panel style="float: left; position: absolute; margin-left: 210px; background: linear-gradient(45deg, blueviolet, palegreen) no-repeat center fixed; border: 2px solid black">
+            <p:panel style="float: left; position: absolute; margin-left: 210px;">
                 <h2 style="text-align: center; text-decoration: underline; color: black">Badges</h2>
                 <p:dataTable id="badges" var="badge" value="#{badgeBean.badges}" selectionMode="single" selection="#{badgeBean.selectedBadge}" rowKey="#{badge.id}" style="text-align: center;">
                     <p:column headerText="ID">
@@ -33,7 +33,7 @@ and open the template in the editor.
                         <h:outputText value="#{badge.contenu}" style="color: black"/>
                     </p:column>
                     <f:facet name="footer">
-                        <p:commandButton value="Remove" action="#{badgeBean.removeBadge(badgeBean.selectedBadge)}" update="badges" ajax="false" style="border: 2px solid black; color: black"/>
+                        <p:commandButton value="Remove" action="#{badgeBean.removeBadge(badgeBean.selectedBadge)}" update="badges" ajax="false"/>
                     </f:facet>
                 </p:dataTable>
             </p:panel>
